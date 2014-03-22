@@ -5,6 +5,9 @@
 class Route
 {
     public:
+        list<Position> positionsDepartPossible();
+        list<Position> positionsArriveePossible();
+        list<Position> positionsIntersection();
         Route();
         virtual ~Route();
     protected:
