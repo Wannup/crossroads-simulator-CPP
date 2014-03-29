@@ -1,8 +1,8 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-#include <list>
 #include <Contrainte.h>
+#include <list>
 
 class Position
 {
@@ -12,8 +12,8 @@ private:
     int x;
     int y;
     bool isFree;
-    std::List<Position> positionsConnexes;
-    std::List<Contrainte> contraintes;
+    std::list<Position> positionsConnexes;
+//    std::list<Contrainte> contraintes;
 };
 
 #endif // POSITION_H

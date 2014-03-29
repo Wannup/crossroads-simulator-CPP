@@ -2,18 +2,19 @@
 #define VEHICULE_H
 
 #include <list>
+#include <Position.h>
 
 class Vehicule
 {
 public:
-    avancer();
-    reculer();
-    tournerGauche();
-    tournerDroite();
+    void avancer();
+    void reculer();
+    void tournerGauche();
+    void tournerDroite();
     Vehicule();
 private:
     bool canMove;
-    std::List<Position> PositionsPrevisionnelles;
+    std::list<Position> PositionsPrevisionnelles;
 };
 
 #endif // VEHICULE_H
