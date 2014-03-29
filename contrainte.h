@@ -1,10 +1,13 @@
 #ifndef CONTRAINTE_H
 #define CONTRAINTE_H
 
+#include <list>
+#include <Position.h>
+
 class Contrainte
 {
 public:
-    list<Position> positionsApplicationContrainte();
+    std::list<Position> positionsApplicationContrainte();
     Contrainte();
 private:
     bool isApplicable;

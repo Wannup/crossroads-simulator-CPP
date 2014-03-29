@@ -1,14 +1,17 @@
 #ifndef CARREFOUR_H
 #define CARREFOUR_H
 
+#include <Route.h>
+#include <list>
+
 class Carrefour
 {
 public:
     Route findRouteByPosition(Position p);
     Carrefour();
-    Carrefour(list<Route> r);
+    Carrefour(std::list<Route> r);
 private:
-    list<Route> routes;
+    std::list<Route> routes;
 };
 
 #endif // CARREFOUR_H

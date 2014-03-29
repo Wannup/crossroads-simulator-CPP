@@ -1,28 +1,28 @@
 TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG += qt
+QT += widgets
 
 SOURCES += main.cpp \
-    carrefour.cpp \
-    contrainte.cpp \
-    feutricolore.cpp \
-    position.cpp \
-    route.cpp \
-    vehicule.cpp \
-    voiture.cpp \
-    mainwindow.cpp
+    Carrefour.cpp \
+    Contrainte.cpp \
+    FenPrincipale.cpp \
+    Feutricolore.cpp \
+    Position.cpp \
+    Route.cpp \
+    Vehicule.cpp \
+    Voiture.cpp
 
 HEADERS += \
-    carrefour.h \
-    contrainte.h \
-    feutricolore.h \
-    position.h \
-    route.h \
-    vehicule.h \
-    voiture.h \
-    mainwindow.h
+    Carrefour.h \
+    Contrainte.h \
+    FenPrincipale.h \
+    Feutricolore.h \
+    Position.h \
+    Route.h \
+    Voiture.h \
+    Vehicule.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 

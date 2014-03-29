@@ -1,4 +1,4 @@
-#include "contrainte.h"
+#include "Contrainte.h"
 
 Contrainte::Contrainte()
 {

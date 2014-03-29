@@ -1,4 +1,4 @@
-#include "feutricolore.h"
+#include "Feutricolore.h"
 
 FeuTricolore::FeuTricolore()
 {
