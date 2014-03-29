@@ -1,7 +1,10 @@
 #ifndef VOITURE_H
 #define VOITURE_H
 
-class Voiture
+#include <Vehicule.h>
+
+
+class Voiture : Vehicule
 {
 public:
     Voiture();
