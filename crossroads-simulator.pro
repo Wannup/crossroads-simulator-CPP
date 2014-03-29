@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     position.cpp \
     route.cpp \
     vehicule.cpp \
-    voiture.cpp
+    voiture.cpp \
+    mainwindow.cpp
 
 HEADERS += \
     carrefour.h \
@@ -19,5 +20,9 @@ HEADERS += \
     position.h \
     route.h \
     vehicule.h \
-    voiture.h
+    voiture.h \
+    mainwindow.h
+
+FORMS += \
+    mainwindow.ui
 
