@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     Position.cpp \
     Route.cpp \
     Vehicule.cpp \
-    Voiture.cpp
+    Voiture.cpp \
+    Pieton.cpp
 
 HEADERS += \
     Carrefour.h \
@@ -22,7 +23,8 @@ HEADERS += \
     Position.h \
     Route.h \
     Voiture.h \
-    Vehicule.h
+    Vehicule.h \
+    Pieton.h
 
 FORMS +=
 

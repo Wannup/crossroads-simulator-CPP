@@ -5,6 +5,8 @@ class FeuTricolore
 {
 public:
     FeuTricolore();
+private:
+
 };
 
 #endif // FEUTRICOLORE_H
