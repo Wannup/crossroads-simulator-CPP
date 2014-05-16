@@ -1,4 +1,6 @@
 #include "pieton.h"
+#include <cstring>
+#include <string>
 
 Pieton::Pieton()
 {
@@ -12,22 +14,14 @@ Pieton::Pieton(int v, int d, int x, int y)
     posy = y;
 }
 
-void Pieton::avancer(string mouvement){
-    switch (mouvement)
-    {
-    case "up":
+void Pieton::avancer(std::string mouvement){
+    if (strcmp(mouvement.c_str(), "up") == 0) {
         posy++;
-      break;
-    case "down":
+    } else if (strcmp(mouvement.c_str(), "down") == 0) {
         posy--;
-      break;
-    case "left":
+    } else if (strcmp(mouvement.c_str(), "left") == 0) {
         posx--;
-      break;
-    case "right":
+    } else if (strcmp(mouvement.c_str(), "right") == 0) {
         posx++;
-      break;
-    default:
-      break;
     }
 }

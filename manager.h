@@ -3,6 +3,9 @@
 
 #include "fenetre.h"
 #include "grille.h"
+#include <QLabel>
+#include <QTextEdit>
+#include <QPushButton>
 
 class manager : public QObject {
 
@@ -14,11 +17,17 @@ public:
 
 public slots :
     void newProjet();
+    void createGrille();
     void importProject();
 
 private :
     fenetre * f;
     grille *g;
+    QLabel * widthLabel;
+    QTextEdit * widthText;
+    QLabel * heightLabel;
+    QTextEdit * heightText;
+    QPushButton * valideButton;
 };
 
 #endif // MANAGER_H

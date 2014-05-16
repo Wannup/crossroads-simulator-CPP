@@ -2,14 +2,19 @@
 #define FENETRE_H
 
 #include <QWidget>
-#include <QMainWindow>
+#include "panel.h"
 
-class fenetre : public QMainWindow {
+class fenetre : public QWidget {
 
     public:
         fenetre();
-
+        Panel * getTopPanel();
+        Panel * getCenterPanel();
+        Panel * getRightPanel();
     private :
+        Panel * topPanel;
+        Panel * centerPanel;
+        Panel * rightPanel;
     
 };
 

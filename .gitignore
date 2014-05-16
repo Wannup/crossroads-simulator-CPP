@@ -1,6 +1,5 @@
-*.pro
-*.pro
-
-crossroads-simulator.pro
 
 crossroads-simulator.pro.user
+
+*.pro.user
+*.pro.user.*
