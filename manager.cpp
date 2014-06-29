@@ -13,19 +13,22 @@ int manager::begin(int argc, char *argv[]) {
 
     f = new fenetre();
 
-    QPushButton  * boutonCreerProjet = new QPushButton("Creer un projet");
-    QObject::connect(boutonCreerProjet, SIGNAL(clicked()), this, SLOT(newProjet()));
-    boutonCreerProjet->move(250, 100);
-    f->getCenterPanel()->addWidget(boutonCreerProjet);
+    QMenuBar *menu = new QMenuBar(f);
+    QMenu* menu1 = new QMenu("Fichier");
 
-    QPushButton * boutonOuvrirProjet = new QPushButton("Ouvrir un projet");
-    QObject::connect(boutonOuvrirProjet, SIGNAL(clicked()), this, SLOT(importProject()));
-    boutonOuvrirProjet->move(250, 200);
-    f->getCenterPanel()->addWidget(boutonOuvrirProjet);
-    QPushButton * boutonQuitter = new QPushButton("quitter");
-    QObject::connect(boutonQuitter, SIGNAL(clicked()), &app, SLOT(quit()));
-    boutonQuitter->move(250, 300);
-    f->getCenterPanel()->addWidget(boutonQuitter);
+    QAction  * boutonCreerProjet = new QAction("Creer un projet", f);
+    QAction * boutonOuvrirProjet = new QAction("Ouvrir un projet", f);
+    QAction * boutonQuitter = new QAction("Quitter", f);
+
+    menu1->addAction(boutonCreerProjet);
+    menu1->addAction(boutonOuvrirProjet);
+    menu1->addAction(boutonQuitter);
+
+    QObject::connect(boutonQuitter, SIGNAL(triggered()), &app, SLOT(quit()));
+    QObject::connect(boutonOuvrirProjet, SIGNAL(triggered()), this, SLOT(importProject()));
+    QObject::connect(boutonCreerProjet, SIGNAL(triggered()), this, SLOT(newProjet()));
+
+    menu->addMenu(menu1);
 
     widthLabel = new QLabel("width");
     widthLabel->move(50, 50);

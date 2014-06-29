@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QTextEdit>
 #include <QPushButton>
+#include <QMenuBar>
+
 
 class manager : public QObject {
 
