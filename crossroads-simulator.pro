@@ -33,3 +33,8 @@ HEADERS += \
     vehicule.h \
     voiture.h \
     Pieton.h
+
+FORMS += \
+    mainwindow.ui \
+    accueil.ui \
+    projet.ui

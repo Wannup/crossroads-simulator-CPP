@@ -2,6 +2,7 @@
 #include "parcelle.h"
 #include "grille.h"
 #include <QApplication>
+#include <QTreeWidget>
 
 manager::manager() {
 
@@ -31,7 +32,7 @@ int manager::begin(int argc, char *argv[]) {
     widthLabel->move(50, 50);
     f->getTopPanel()->addWidget(widthLabel);
 
-    widthText = new QTextEdit("5");
+    widthText = new QTextEdit("10");
     widthText->move(100, 50);
     widthText->setFixedSize(50, 30);
     f->getTopPanel()->addWidget(widthText);
@@ -40,7 +41,7 @@ int manager::begin(int argc, char *argv[]) {
     heightLabel->move(180, 50);
     f->getTopPanel()->addWidget(heightLabel);
 
-    heightText = new QTextEdit("5");
+    heightText = new QTextEdit("10");
     heightText->move(250, 50);
     heightText->setFixedSize(50, 30);
     f->getTopPanel()->addWidget(heightText);
@@ -50,8 +51,31 @@ int manager::begin(int argc, char *argv[]) {
     valideButton->move(350, 50);
     f->getTopPanel()->addWidget(valideButton);
 
+    playButton = new QPushButton("play");
+    QObject::connect(playButton, SIGNAL(clicked()), this, SLOT(play()));
+    playButton->move(450, 50);
+    f->getTopPanel()->addWidget(playButton);
+
+    pauseButton = new QPushButton("pause");
+    QObject::connect(pauseButton, SIGNAL(clicked()), this, SLOT(pause()));
+    pauseButton->move(550, 50);
+    f->getTopPanel()->addWidget(pauseButton);
+
+    stopButton = new QPushButton("stop");
+    QObject::connect(stopButton, SIGNAL(clicked()), this, SLOT(stop()));
+    stopButton->move(650, 50);
+    f->getTopPanel()->addWidget(stopButton);
+
+    saveButton = new QPushButton("save");
+    QObject::connect(saveButton, SIGNAL(clicked()), this, SLOT(save()));
+    saveButton->move(750, 50);
+    f->getTopPanel()->addWidget(saveButton);
+
     f->getTopPanel()->setVisible(false);
 
+    QTreeWidget * treeWidget = new QTreeWidget();
+    f->getRightPanel()->addWidget(treeWidget);
+    QTreeWidgetItem * treeWidgetItem = new QTreeWidgetItem(treeWidget);
 
     QPushButton  * boutonRoute = new QPushButton("route");
     boutonRoute->move(20, 50);
@@ -60,6 +84,8 @@ int manager::begin(int argc, char *argv[]) {
     QPushButton  * boutonSignalisation = new QPushButton("signalisation");
     boutonSignalisation->move(20, 100);
     f->getRightPanel()->addWidget(boutonSignalisation);
+
+    f->getRightPanel()->setVisible(false);
 
     f->show();
 
@@ -79,7 +105,15 @@ void manager::newProjet() {
     f->getCenterPanel()->removeAll();
     f->getCenterPanel()->setLayout(g->getGridLayout());
 
+    this->createGrille();
+
     f->getTopPanel()->setVisible(true);
+    f->getRightPanel()->setVisible(true);
+
+    playButton->setDisabled(false);
+    pauseButton->setDisabled((true));
+    stopButton->setDisabled((true));
+    saveButton->setDisabled(false);
 
 }
 
@@ -106,5 +140,33 @@ void manager::createGrille() {
 }
 
 void manager::importProject() {
+
+}
+
+void manager::play() {
+    valideButton->setDisabled(true);
+    playButton->setDisabled(true);
+    pauseButton->setDisabled(false);
+    stopButton->setDisabled(false);
+    saveButton->setDisabled(true);
+}
+
+void manager::pause() {
+    valideButton->setDisabled(false);
+    playButton->setDisabled(false);
+    pauseButton->setDisabled((true));
+    stopButton->setDisabled((true));
+    saveButton->setDisabled(false);
+}
+
+void manager::stop() {
+    valideButton->setDisabled(false);
+    playButton->setDisabled(false);
+    pauseButton->setDisabled((true));
+    stopButton->setDisabled((true));
+    saveButton->setDisabled(false);
+}
+
+void manager::save() {
 
 }

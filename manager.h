@@ -19,6 +19,10 @@ public slots :
     void newProjet();
     void createGrille();
     void importProject();
+    void play();
+    void pause();
+    void stop();
+    void save();
 
 private :
     fenetre * f;
@@ -28,6 +32,10 @@ private :
     QLabel * heightLabel;
     QTextEdit * heightText;
     QPushButton * valideButton;
+    QPushButton * playButton;
+    QPushButton * pauseButton;
+    QPushButton * stopButton;
+    QPushButton * saveButton;
 };
 
 #endif // MANAGER_H
