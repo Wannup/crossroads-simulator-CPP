@@ -3,6 +3,7 @@
 #include "grille.h"
 #include <QApplication>
 #include <QTreeWidget>
+#include <fstream>
 
 manager::manager() {
 
@@ -70,7 +71,7 @@ int manager::begin(int argc, char *argv[]) {
     f->getTopPanel()->addWidget(stopButton);
 
     saveButton = new QPushButton("save");
-    QObject::connect(saveButton, SIGNAL(clicked()), this, SLOT(save()));
+    QObject::connect(saveButton, SIGNAL(clicked()), this, SLOT(saveToXml()));
     saveButton->move(750, 50);
     f->getTopPanel()->addWidget(saveButton);
 
@@ -170,6 +171,37 @@ void manager::stop() {
     saveButton->setDisabled(false);
 }
 
-void manager::save() {
+void manager::saveToXml(string path, string name) {
+    string pathName = path + "/" + name + ".xml";
+    QDomDocument *dom = new QDomDocument(QString::fromStdString(name)); // Création de l'objet DOM
 
+    ofstream objetfichier;
+    objetfichier.open(pathName.c_str(), ios::out);  //on ouvrre le fichier en ecriture
+    if (objetfichier.bad())                 //permet de tester si le fichier s'est ouvert sans probleme
+       cout << "Erreur à la création du fichier" << endl;
+    objetfichier <<"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" << endl;
+    objetfichier.close();                   //on ferme le fichier pour liberer la mémoire
+
+    QFile xml_doc(QString::fromStdString(pathName));
+    if(!xml_doc.open(QIODevice::ReadOnly))
+    {
+         cout << "Erreur à l'ouverture du document XML ,Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé" << endl;
+         return;
+    }
+
+    if (!dom->setContent(&xml_doc))
+    {
+         xml_doc.close();
+         cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être attribué à l'objet QDomDocument."<< endl;
+         return;
+     }
+}
+
+void manager::loadFromXml(string path) {
+    QFile xml_doc(QString::fromStdString(path));
+    if(!xml_doc.open(QIODevice::ReadOnly))  // Si l'on n'arrive pas à ouvrir le fichier XML.
+    {
+         cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé"<< endl;
+         return;
+    }
 }

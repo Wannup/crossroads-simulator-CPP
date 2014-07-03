@@ -7,7 +7,11 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <QMenuBar>
+#include <QtXml>
+#include <iostream>
+#include <string>
 
+using namespace std;
 
 class manager : public QObject {
 
@@ -24,7 +28,8 @@ public slots :
     void play();
     void pause();
     void stop();
-    void save();
+    void saveToXml(string path, string name);
+    void loadFromXml(string path);
 
 private :
     fenetre * f;
