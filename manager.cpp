@@ -1,6 +1,8 @@
 #include "manager.h"
 #include "parcelle.h"
 #include "grille.h"
+#include "drawer.h"
+#include "drawablewidget.h"
 #include <QApplication>
 #include <QTreeWidget>
 #include <fstream>
@@ -77,17 +79,26 @@ int manager::begin(int argc, char *argv[]) {
 
     f->getTopPanel()->setVisible(false);
 
-    QTreeWidget * treeWidget = new QTreeWidget();
-    f->getRightPanel()->addWidget(treeWidget);
-    QTreeWidgetItem * treeWidgetItem = new QTreeWidgetItem(treeWidget);
+    DrawableWidget drawableWidgetRouteHorizontal(new drawer(route_horizontal));
+    drawableWidgetRouteHorizontal.move(20, 100);
+    drawableWidgetRouteHorizontal.setFixedSize(40, 40);
+    drawableWidgetRouteHorizontal.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetRouteHorizontal);
 
-    QPushButton  * boutonRoute = new QPushButton("route");
-    boutonRoute->move(20, 50);
-    f->getRightPanel()->addWidget(boutonRoute);
+    DrawableWidget drawableWidgetRouteVertical(new drawer(route_vertical));
+    drawableWidgetRouteVertical.move(20, 150);
+    drawableWidgetRouteVertical.setFixedSize(40, 40);
+    drawableWidgetRouteVertical.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetRouteVertical);
 
-    QPushButton  * boutonSignalisation = new QPushButton("signalisation");
-    boutonSignalisation->move(20, 100);
-    f->getRightPanel()->addWidget(boutonSignalisation);
+    DrawableWidget drawableWidgetCroisement(new drawer(croisement));
+    drawableWidgetCroisement.move(20, 200);
+    drawableWidgetCroisement.setFixedSize(40, 40);
+    drawableWidgetCroisement.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetCroisement);
+
+
+
 
     f->getRightPanel()->setVisible(false);
 
@@ -134,7 +145,7 @@ void manager::createGrille() {
 
     for (int i = 0 ; i < height ; i++) {
         for (int j = 0; j < width ; j++) {
-            g->addWidget(new parcelle(), i, j);
+            g->addWidget(new DrawableWidget(), i, j);
         }
     }
 

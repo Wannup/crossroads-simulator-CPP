@@ -16,7 +16,9 @@ SOURCES += \
     position.cpp \
     route.cpp \
     vehicule.cpp \
-    voiture.cpp
+    voiture.cpp \
+    drawer.cpp \
+    drawablewidget.cpp
 
 HEADERS += \
     carrefour.h \
@@ -33,7 +35,9 @@ HEADERS += \
     tableaudeuxdimension.h \
     vehicule.h \
     voiture.h \
-    Pieton.h
+    Pieton.h \
+    drawer.h \
+    drawablewidget.h
 
 FORMS += \
     mainwindow.ui \
