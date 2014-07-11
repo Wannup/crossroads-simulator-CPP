@@ -7,7 +7,13 @@
 enum routeType {
     route_horizontal,
     route_vertical,
-    croisement
+    croisement,
+    feu_tricolor,
+    panneau_stop,
+    voiture,
+    moto,
+    camion,
+    pieton
 };
 
 class drawer {

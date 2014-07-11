@@ -9,13 +9,12 @@ class DrawableWidget : public QWidget {
     public:
         DrawableWidget();
         DrawableWidget(drawer *d);
+        void setDrawer (drawer * d);
 
     protected:
         void paintEvent(QPaintEvent *);
         void mousePressEvent(QMouseEvent *);
         void mouseMoveEvent(QMouseEvent *);
-        void dragEnterEvent(QDragEnterEvent *);
-        void dropEvent(QDropEvent *);
 
     private:
         drawer * myDrawer;

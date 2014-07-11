@@ -4,14 +4,24 @@
 #include <Route.h>
 #include <list>
 
-class Carrefour
-{
-public:
-    Route findRouteByPosition(Position p);
-    Carrefour();
-    Carrefour(std::list<Route> r);
-private:
-    std::list<Route> routes;
+#include "grille.h"
+#include "objetroute.h"
+
+class Carrefour {
+
+    public:
+        Carrefour();
+        Carrefour(std::list<Route> r);
+        Route findRouteByPosition(Position p);
+        grille * getGrille();
+        void addObjetRoute (ObjetRoute *);
+        void play();
+
+    private:
+        std::list<Route> routes;
+        std::list<ObjetRoute> objetRoutes;
+        grille * g;
+
 };
 
 #endif // CARREFOUR_H

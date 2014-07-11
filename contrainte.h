@@ -4,13 +4,13 @@
 #include <Position.h>
 #include <list>
 
-class Contrainte
-{
-public:
-    Contrainte();
-private:
-    bool isApplicable;
-    //std::list<Position> positionsPrevisionnelles;
+class Contrainte {
+
+    public:
+        Contrainte();
+    private:
+        bool isApplicable;
+        //std::list<Position> positionsPrevisionnelles;
 };
 
 #endif // CONTRAINTE_H

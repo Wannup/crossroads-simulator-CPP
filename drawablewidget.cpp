@@ -7,11 +7,7 @@
 
 DrawableWidget::DrawableWidget() {
     myDrawer = NULL;
-    QPalette palette(DrawableWidget::palette());
-    palette.setColor(QPalette::Background, Qt::darkGray);
-    setAutoFillBackground(true);
-    setPalette(palette);
-    setAcceptDrops(true);
+    setPalette(Qt::transparent);
 }
 
 DrawableWidget::DrawableWidget(drawer *d) {
@@ -20,7 +16,10 @@ DrawableWidget::DrawableWidget(drawer *d) {
     palette.setColor(QPalette::Background, Qt::darkGray);
     setAutoFillBackground(true);
     setPalette(palette);
-    setAcceptDrops(true);
+}
+
+void DrawableWidget::setDrawer(drawer *d) {
+    myDrawer = d;
 }
 
 void DrawableWidget::mousePressEvent(QMouseEvent *event) {
@@ -44,17 +43,6 @@ void DrawableWidget::mouseMoveEvent(QMouseEvent * event) {
             drag->setMimeData(mimeData);
         }
     }
-}
-
-void DrawableWidget::dragEnterEvent(QDragEnterEvent *event) {
-    event->acceptProposedAction();
-}
-
-void DrawableWidget::dropEvent(QDropEvent * event) {
-    event->acceptProposedAction();
-    QString qs = event->mimeData()->text();
-    myDrawer = new drawer(qs.toStdString());
-    this->repaint();
 }
 
 void DrawableWidget::paintEvent(QPaintEvent *) {

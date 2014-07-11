@@ -1,8 +1,10 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
+#include "carrefour.h"
 #include "fenetre.h"
 #include "grille.h"
+
 #include <QLabel>
 #include <QTextEdit>
 #include <QPushButton>
@@ -33,7 +35,7 @@ public slots :
 
 private :
     fenetre * f;
-    grille *g;
+    Carrefour * carefour;
     QLabel * widthLabel;
     QTextEdit * widthText;
     QLabel * heightLabel;

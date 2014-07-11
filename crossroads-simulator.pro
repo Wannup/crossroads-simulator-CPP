@@ -5,7 +5,6 @@ SOURCES += \
     carrefour.cpp \
     contrainte.cpp \
     fenetre.cpp \
-    fenprincipale.cpp \
     feutricolore.cpp \
     grille.cpp \
     main.cpp \
@@ -18,13 +17,14 @@ SOURCES += \
     vehicule.cpp \
     voiture.cpp \
     drawer.cpp \
-    drawablewidget.cpp
+    drawablewidget.cpp \
+    configuration.cpp \
+    objetroute.cpp
 
 HEADERS += \
     carrefour.h \
     contrainte.h \
     fenetre.h \
-    fenprincipale.h \
     feutricolore.h \
     grille.h \
     manager.h \
@@ -37,7 +37,9 @@ HEADERS += \
     voiture.h \
     Pieton.h \
     drawer.h \
-    drawablewidget.h
+    drawablewidget.h \
+    configuration.h \
+    objetroute.h
 
 FORMS += \
     mainwindow.ui \

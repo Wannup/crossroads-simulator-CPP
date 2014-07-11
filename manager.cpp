@@ -97,7 +97,41 @@ int manager::begin(int argc, char *argv[]) {
     drawableWidgetCroisement.setAcceptDrops(false);
     f->getRightPanel()->addWidget(&drawableWidgetCroisement);
 
+    DrawableWidget drawableWidgetFeuTricolor(new drawer(feu_tricolor));
+    drawableWidgetFeuTricolor.move(20, 250);
+    drawableWidgetFeuTricolor.setFixedSize(40, 40);
+    drawableWidgetFeuTricolor.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetFeuTricolor);
 
+    DrawableWidget drawableWidgetStop(new drawer(panneau_stop));
+    drawableWidgetStop.move(20, 300);
+    drawableWidgetStop.setFixedSize(40, 40);
+    drawableWidgetStop.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetStop);
+
+    DrawableWidget drawableWidgetVoiture(new drawer(voiture));
+    drawableWidgetVoiture.move(20, 350);
+    drawableWidgetVoiture.setFixedSize(40, 40);
+    drawableWidgetVoiture.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetVoiture);
+
+    DrawableWidget drawableWidgetMoto(new drawer(moto));
+    drawableWidgetMoto.move(20, 400);
+    drawableWidgetMoto.setFixedSize(40, 40);
+    drawableWidgetMoto.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetMoto);
+
+    DrawableWidget drawableWidgetCamion(new drawer(camion));
+    drawableWidgetCamion.move(20, 450);
+    drawableWidgetCamion.setFixedSize(40, 40);
+    drawableWidgetCamion.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetCamion);
+
+    DrawableWidget drawableWidgetPieton(new drawer(pieton));
+    drawableWidgetPieton.move(20, 500);
+    drawableWidgetPieton.setFixedSize(40, 40);
+    drawableWidgetPieton.setAcceptDrops(false);
+    f->getRightPanel()->addWidget(&drawableWidgetPieton);
 
 
     f->getRightPanel()->setVisible(false);
@@ -109,18 +143,22 @@ int manager::begin(int argc, char *argv[]) {
 
 void manager::newProjet() {
 
-    g = new grille();
+    this->carefour = new Carrefour();
 
-    for (int i = 0 ; i < 5 ; i++) {
-        for (int j = 0; j < 5 ; j++) {
-            g->addWidget(new parcelle(), i, j);
+    QString stringWidth = widthText->toPlainText();
+    int width = stringWidth.toInt();
+
+    QString stringHeight = heightText->toPlainText();
+    int height = stringHeight.toInt();
+
+    for (int i = 0 ; i < height ; i++) {
+        for (int j = 0; j < width ; j++) {
+            this->carefour->getGrille()->addWidget(new parcelle(i, j, 800/width, 400/height, this->carefour), i, j);
         }
     }
 
     f->getCenterPanel()->removeAll();
-    f->getCenterPanel()->setLayout(g->getGridLayout());
-
-    this->createGrille();
+    f->getCenterPanel()->setLayout(this->carefour->getGrille()->getGridLayout());
 
     f->getTopPanel()->setVisible(true);
     f->getRightPanel()->setVisible(true);
@@ -133,9 +171,9 @@ void manager::newProjet() {
 }
 
 void manager::createGrille() {
-    delete g;
+    /*delete this->carefour->getGrille();
 
-    g = new grille();
+    this->carefour->getGrille() = new grille();*/
 
     QString stringWidth = widthText->toPlainText();
     int width = stringWidth.toInt();
@@ -145,12 +183,12 @@ void manager::createGrille() {
 
     for (int i = 0 ; i < height ; i++) {
         for (int j = 0; j < width ; j++) {
-            g->addWidget(new DrawableWidget(), i, j);
+            this->carefour->getGrille()->addWidget(new parcelle(i, j, 800/width, 400/height, this->carefour), i, j);
         }
     }
 
     f->getCenterPanel()->removeAll();
-    f->getCenterPanel()->setLayout(g->getGridLayout());
+    f->getCenterPanel()->setLayout(this->carefour->getGrille()->getGridLayout());
 
 }
 
@@ -164,6 +202,7 @@ void manager::play() {
     pauseButton->setDisabled(false);
     stopButton->setDisabled(false);
     saveButton->setDisabled(true);
+    this->carefour->play();
 }
 
 void manager::pause() {

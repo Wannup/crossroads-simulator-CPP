@@ -10,6 +10,8 @@ public:
     void addItem(T, int, int);
     T getItem(int, int);
     ~tableauDeuxDimension();
+    int getWidth();
+    int getHeight();
 
 private:
     T ** tableau;
@@ -90,6 +92,16 @@ tableauDeuxDimension<T>::~tableauDeuxDimension() {
             delete tableau[i][j];
         }
     }
+}
+
+template<class T>
+int tableauDeuxDimension<T>::getWidth() {
+    return this->width;
+}
+
+template<class T>
+int tableauDeuxDimension<T>::getHeight() {
+    return this->height;
 }
 
 #endif // TABLEAUDEUXDIMENSION_H
