@@ -5,7 +5,10 @@
 #include "drawablewidget.h"
 #include <QApplication>
 #include <QTreeWidget>
+#include <QFileDialog>
 #include <fstream>
+#include <QFileInfo>
+#include <QMessageBox>
 
 manager::manager() {
 
@@ -29,7 +32,7 @@ int manager::begin(int argc, char *argv[]) {
     menu1->addAction(boutonQuitter);
 
     QObject::connect(boutonQuitter, SIGNAL(triggered()), &app, SLOT(quit()));
-    QObject::connect(boutonOuvrirProjet, SIGNAL(triggered()), this, SLOT(importProject()));
+    QObject::connect(boutonOuvrirProjet, SIGNAL(triggered()), this, SLOT(loadFromXml()));
     QObject::connect(boutonCreerProjet, SIGNAL(triggered()), this, SLOT(newProjet()));
 
     menu->addMenu(menu1);
@@ -192,10 +195,6 @@ void manager::createGrille() {
 
 }
 
-void manager::importProject() {
-
-}
-
 void manager::play() {
     valideButton->setDisabled(true);
     playButton->setDisabled(true);
@@ -221,37 +220,79 @@ void manager::stop() {
     saveButton->setDisabled(false);
 }
 
-void manager::saveToXml(string path, string name) {
-    string pathName = path + "/" + name + ".xml";
-    QDomDocument *dom = new QDomDocument(QString::fromStdString(name)); // Création de l'objet DOM
+void manager::saveToXml() {
 
-    ofstream objetfichier;
-    objetfichier.open(pathName.c_str(), ios::out);  //on ouvrre le fichier en ecriture
-    if (objetfichier.bad())                 //permet de tester si le fichier s'est ouvert sans probleme
-       cout << "Erreur à la création du fichier" << endl;
-    objetfichier <<"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" << endl;
-    objetfichier.close();                   //on ferme le fichier pour liberer la mémoire
+    QDomDocument dom_doc;
+    QFile fichier;
+    QTextStream out;
 
-    QFile xml_doc(QString::fromStdString(pathName));
-    if(!xml_doc.open(QIODevice::ReadOnly))
-    {
-         cout << "Erreur à l'ouverture du document XML ,Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé" << endl;
-         return;
+    QString file = QFileDialog::getSaveFileName(f, tr("Sauvegarder un projet"),"",tr("(*.xml)"));
+    fichier.setFileName(file);
+
+    QDomElement projet;
+    projet = dom_doc.createElement("projet");
+    dom_doc.appendChild(projet);
+
+    QString stringWidth = widthText->toPlainText();
+    int width = stringWidth.toInt();
+
+    QString stringHeight = heightText->toPlainText();
+    int height = stringHeight.toInt();
+
+    if (fichier.open(QIODevice::ReadWrite)){
+        out.setDevice(&fichier);
+        QDomElement grille = dom_doc.createElement("grille");
+        projet.appendChild(grille);
+        for (int i = 0 ; i < height ; i++) {
+            for (int j = 0; j < width ; j++) {
+                QDomElement cases = dom_doc.createElement("case");
+                grille.appendChild(cases);
+                cases.setAttribute("type",1); // Type de case
+
+                QDomElement x = dom_doc.createElement("Coord_X");
+                cases.appendChild(x);
+                QDomText x1 = dom_doc.createTextNode("X"); // Valeur X
+                x.appendChild(x1);
+                QDomElement y = dom_doc.createElement("Coord_Y");
+                cases.appendChild(y);
+                QDomText y1 = dom_doc.createTextNode("Y"); // Valeur Y
+                y.appendChild(y1);
+            }
+        }
+
+        QDomNode noeud = dom_doc.createProcessingInstruction("xml","version=\"1.0\"");
+        dom_doc.insertBefore(noeud,dom_doc.firstChild());
+
+        dom_doc.save(out,2);
+
+        fichier.close();
     }
-
-    if (!dom->setContent(&xml_doc))
-    {
-         xml_doc.close();
-         cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être attribué à l'objet QDomDocument."<< endl;
-         return;
-     }
 }
 
-void manager::loadFromXml(string path) {
-    QFile xml_doc(QString::fromStdString(path));
+
+void manager::loadFromXml() {
+    QString files = QFileDialog::getOpenFileName(f, tr("Ouvrir un projet"),"",tr("(*.xml)"));
+
+    if(files.isEmpty()) {
+        cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé"<< endl;
+        return;
+    }
+
+    QFileInfo fileInfo(files);
+    QString path = fileInfo.filePath(); // Path vers le fichier
+
+    QFile xml_doc(path);
+
     if(!xml_doc.open(QIODevice::ReadOnly))  // Si l'on n'arrive pas à ouvrir le fichier XML.
     {
          cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé"<< endl;
          return;
     }
+
+
+    // Génération de la grille
+    //
+    // TO DO
+
+
 }

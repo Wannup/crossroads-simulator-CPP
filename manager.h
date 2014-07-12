@@ -30,8 +30,8 @@ public slots :
     void play();
     void pause();
     void stop();
-    void saveToXml(string path, string name);
-    void loadFromXml(string path);
+    void saveToXml();
+    void loadFromXml();
 
 private :
     fenetre * f;
