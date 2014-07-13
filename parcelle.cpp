@@ -10,15 +10,20 @@ parcelle::parcelle() : QWidget() {
     this->drawableWidgetRoute->setParent(this);
     this->drawableWidgetVoiture = new DrawableWidget();
     this->drawableWidgetVoiture->setParent(this);
+    this->positionX = 0;
+    this->positionY = 0;
     setAcceptDrops(true);
 }
 
 parcelle::parcelle(const parcelle & parc) {
-
+    this->positionX = parc.positionX;
+    this->positionY = parc.positionY;
 }
 
 parcelle & parcelle::operator= (const parcelle & parc) {
-
+    this->positionX = parc.positionX;
+    this->positionY = parc.positionY;
+    return *this;
 }
 
 parcelle::~parcelle() {

@@ -9,7 +9,7 @@ ObjetRoute::ObjetRoute(const ObjetRoute & objRoute) {
 }
 
 ObjetRoute & ObjetRoute::operator= (const ObjetRoute & objRoute) {
-
+    return *this;
 }
 
 ObjetRoute::~ObjetRoute() {

@@ -6,6 +6,7 @@
 
 #include "grille.h"
 #include "objetroute.h"
+#include "vehicule.h"
 
 class Carrefour {
 
@@ -16,13 +17,13 @@ class Carrefour {
         Carrefour & operator=(const Carrefour &);
         Route findRouteByPosition(Position p);
         grille * getGrille();
-        void addObjetRoute (ObjetRoute *);
+        void addObjetRoute (Vehicule *);
         void play();
         ~Carrefour();
 
     private:
         std::list<Route> routes;
-        std::list<ObjetRoute> objetRoutes;
+        std::list<Vehicule> objetRoutes;
         grille * g;
 
 };

@@ -35,20 +35,20 @@ grille * Carrefour::getGrille () {
     return this->g;
 }
 
-void Carrefour::addObjetRoute(ObjetRoute * objRoute) {
+void Carrefour::addObjetRoute(Vehicule * objRoute) {
     this->objetRoutes.push_back(*objRoute);
 }
 
 void Carrefour::play() {
-    std::list<ObjetRoute>::iterator it;
+    std::list<Vehicule>::iterator it;
     for (it = this->objetRoutes.begin() ; it != this->objetRoutes.end() ; it++) {
-        ObjetRoute objr = (ObjetRoute) *it;
+        Vehicule objr = (Vehicule) *it;
         Voiture * v = (Voiture *) &objr;
         Position * p = v->getPosition();
-        parcelle * parc = (parcelle *) this->g->getWidget(0, 0);
+        parcelle * parc = (parcelle *) this->g->getWidget(p->getPositionX(), p->getPositionY());
         parc->removeVoiture();
         v->avancer();
-        parcelle * parc2 = (parcelle *) this->g->getWidget(0, 1);
+        parcelle * parc2 = (parcelle *) this->g->getWidget(p->getPositionX(), p->getPositionY());
         parc2->addVoiture();
     }
 }

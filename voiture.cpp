@@ -8,12 +8,13 @@ Voiture::Voiture(Position * pos):Vehicule(pos) {
 
 }
 
-Voiture::Voiture(const Voiture & config) {
+Voiture::Voiture(const Voiture & voiture):Vehicule(voiture) {
 
 }
 
-Voiture & Voiture::operator= (const Voiture & config) {
-
+Voiture & Voiture::operator= (const Voiture & voiture) {
+    Vehicule::operator =(voiture);
+    return *this;
 }
 
 Voiture::~Voiture() {

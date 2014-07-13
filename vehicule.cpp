@@ -1,15 +1,17 @@
 #include "vehicule.h"
 
-Vehicule::Vehicule(){
+Vehicule::Vehicule() : ObjetRoute::ObjetRoute() {
 
 }
 
-Vehicule::Vehicule(const Vehicule & vehicule) {
-
+Vehicule::Vehicule(const Vehicule & vehicule) : ObjetRoute::ObjetRoute(vehicule) {
+    this->position = vehicule.position;
 }
 
 Vehicule & Vehicule::operator= (const Vehicule & vehicule) {
-
+    ObjetRoute::operator =(vehicule);
+    this->position = vehicule.position;
+    return *this;
 }
 
 Vehicule::~Vehicule() {

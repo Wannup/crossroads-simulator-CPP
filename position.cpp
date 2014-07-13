@@ -1,7 +1,8 @@
 #include "Position.h"
 
 Position::Position() {
-
+    this->x = 0;
+    this->y = 0;
 }
 
 Position::Position(int i, int j) {
@@ -10,11 +11,18 @@ Position::Position(int i, int j) {
 }
 
 Position::Position(const Position & position) {
+    this->x = position.x;
+    this->y = position.y;
 
 }
 
 Position & Position::operator= (const Position & position) {
-
+    if (this == &position) {
+        return *this;
+    }
+    this->x = position.x;
+    this->y = position.y;
+    return *this;
 }
 
 Position::~Position() {
@@ -22,19 +30,19 @@ Position::~Position() {
 }
 
 void Position::avancer() {
-    this->x++;
-}
-
-void Position::reculer () {
-    this->x--;
-}
-
-void Position::droite() {
     this->y++;
 }
 
-void Position::gauche() {
+void Position::reculer () {
     this->y--;
+}
+
+void Position::droite() {
+    this->x++;
+}
+
+void Position::gauche() {
+    this->x--;
 }
 
 int Position::getPositionX() {

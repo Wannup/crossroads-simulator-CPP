@@ -195,6 +195,10 @@ void manager::createGrille() {
 
 }
 
+void manager::importProject() {
+
+}
+
 void manager::play() {
     valideButton->setDisabled(true);
     playButton->setDisabled(true);
