@@ -9,6 +9,18 @@ Position::Position(int i, int j) {
     this->y = j;
 }
 
+Position::Position(const Position & position) {
+
+}
+
+Position & Position::operator= (const Position & position) {
+
+}
+
+Position::~Position() {
+
+}
+
 void Position::avancer() {
     this->x++;
 }

@@ -4,24 +4,31 @@
 template<class T>
 class tableauDeuxDimension {
 
-public:
-    tableauDeuxDimension();
-    tableauDeuxDimension(int , int);
-    void addItem(T, int, int);
-    T getItem(int, int);
-    ~tableauDeuxDimension();
-    int getWidth();
-    int getHeight();
+    public:
+        tableauDeuxDimension();
+        tableauDeuxDimension(const tableauDeuxDimension &);
+        tableauDeuxDimension & operator=(const tableauDeuxDimension &);
+        tableauDeuxDimension(int , int);
+        void addItem(T, int, int);
+        T getItem(int, int);
+        ~tableauDeuxDimension();
+        int getWidth();
+        int getHeight();
 
-private:
-    T ** tableau;
-    int width;
-    int height;
+    private:
+        T ** tableau;
+        int width;
+        int height;
 
 };
 
 template<class T>
 tableauDeuxDimension<T>::tableauDeuxDimension() {
+    //tableau = NULL;
+}
+
+template<class T>
+tableauDeuxDimension<T>::tableauDeuxDimension(const tableauDeuxDimension & tableau) {
     //tableau = NULL;
 }
 
@@ -33,7 +40,11 @@ tableauDeuxDimension<T>::tableauDeuxDimension(int w, int h) {
     for (int i = 0 ; i < width ; i++) {
         tableau[i] = new T[height];
     }
+}
 
+template<class T>
+tableauDeuxDimension<T> & tableauDeuxDimension<T>::operator=(const tableauDeuxDimension & tableau) {
+    //tableau = NULL;
 }
 
 template<class T>

@@ -11,11 +11,14 @@ class Carrefour {
 
     public:
         Carrefour();
+        Carrefour(const Carrefour &);
         Carrefour(std::list<Route> r);
+        Carrefour & operator=(const Carrefour &);
         Route findRouteByPosition(Position p);
         grille * getGrille();
         void addObjetRoute (ObjetRoute *);
         void play();
+        ~Carrefour();
 
     private:
         std::list<Route> routes;

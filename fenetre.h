@@ -8,6 +8,9 @@ class fenetre : public QWidget {
 
     public:
         fenetre();
+        fenetre(const fenetre &);
+        fenetre & operator=(const fenetre &);
+        ~fenetre();
         Panel * getTopPanel();
         Panel * getCenterPanel();
         Panel * getRightPanel();

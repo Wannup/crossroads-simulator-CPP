@@ -10,6 +10,9 @@ class Vehicule : public ObjetRoute {
 
     public:
         Vehicule();
+        Vehicule(const Vehicule &);
+        Vehicule & operator=(const Vehicule &);
+        ~Vehicule();
         Vehicule(Position *);
         Position * getPosition();
         void avancer();

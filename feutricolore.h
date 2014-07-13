@@ -7,6 +7,9 @@ class FeuTricolore : public ObjetRoute {
 
     public:
         FeuTricolore();
+        FeuTricolore(const FeuTricolore &);
+        FeuTricolore & operator=(const FeuTricolore &);
+        ~FeuTricolore();
         FeuTricolore(bool state, int frequencyChange);
 
     private:

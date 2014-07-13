@@ -4,13 +4,17 @@
 #include <list>
 #include <Position.h>
 
-class Route
-{
-public:
-    std::list<Position> positionsDepartPossible();
-    std::list<Position> positionsArriveePossible();
-    std::list<Position> positionsIntersection();
-    Route();
+class Route {
+
+    public:
+        Route();
+        Route(const Route &);
+        Route & operator=(const Route &);
+        ~Route();
+        std::list<Position> positionsDepartPossible();
+        std::list<Position> positionsArriveePossible();
+        std::list<Position> positionsIntersection();
+
 };
 
 #endif // ROUTE_H

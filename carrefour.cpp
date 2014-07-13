@@ -7,8 +7,24 @@ Carrefour::Carrefour() {
     g = new grille();
 }
 
+Carrefour::Carrefour(const Carrefour & carf) {
+    this->g = carf.g;
+    this->objetRoutes = carf.objetRoutes;
+    this->routes = carf.routes;
+}
+
 Carrefour::Carrefour(std::list<Route> r) {
     routes = r;
+}
+
+Carrefour & Carrefour::operator=(const Carrefour & carf) {
+    if (this == &carf) {
+        return *this;
+    }
+    this->g = carf.g;
+    this->objetRoutes = carf.objetRoutes;
+    this->routes = carf.routes;
+    return *this;
 }
 
 Route Carrefour::findRouteByPosition(Position p) {
@@ -35,5 +51,9 @@ void Carrefour::play() {
         parcelle * parc2 = (parcelle *) this->g->getWidget(0, 1);
         parc2->addVoiture();
     }
+}
+
+Carrefour::~Carrefour() {
+    delete this->g;
 }
 

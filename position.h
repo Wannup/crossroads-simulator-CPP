@@ -1,7 +1,8 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-#include <Contrainte.h>
+#include "contrainte.h"
+
 #include <list>
 
 enum orientation {
@@ -18,6 +19,9 @@ class Position {
 
     public:
         Position();
+        Position(const Position &);
+        Position & operator=(const Position &);
+        ~Position();
         Position(int, int);
         void avancer();
         void reculer();

@@ -8,6 +8,9 @@ class DrawableWidget : public QWidget {
 
     public:
         DrawableWidget();
+        DrawableWidget(const DrawableWidget &);
+        DrawableWidget & operator=(const DrawableWidget &);
+        ~DrawableWidget();
         DrawableWidget(drawer *d);
         void setDrawer (drawer * d);
 

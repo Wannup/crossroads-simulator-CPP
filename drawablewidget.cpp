@@ -4,10 +4,21 @@
 #include <QtGui>
 #include <QApplication>
 
-
 DrawableWidget::DrawableWidget() {
     myDrawer = NULL;
     setPalette(Qt::transparent);
+}
+
+DrawableWidget::DrawableWidget(const DrawableWidget & drawableWidget) {
+
+}
+
+DrawableWidget & DrawableWidget::operator= (const DrawableWidget & drawableWidget) {
+
+}
+
+DrawableWidget::~DrawableWidget() {
+
 }
 
 DrawableWidget::DrawableWidget(drawer *d) {

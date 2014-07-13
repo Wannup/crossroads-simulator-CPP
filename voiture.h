@@ -10,6 +10,9 @@ class Voiture : public Vehicule {
     public:
         Voiture();
         Voiture(Position *);
+        ~Voiture();
+        Voiture(const Voiture &);
+        Voiture & operator=(const Voiture &);
 
 };
 

@@ -2,6 +2,22 @@
 #include <QDrag>
 #include <QMimeData>
 
+Panel::Panel() {
+
+}
+
+Panel::Panel(const Panel & panel) {
+
+}
+
+Panel & Panel::operator= (const Panel & panel) {
+
+}
+
+Panel::~Panel() {
+
+}
+
 Panel::Panel(QWidget *parent) : QWidget(parent) {
 
 }

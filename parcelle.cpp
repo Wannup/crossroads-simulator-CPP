@@ -13,6 +13,18 @@ parcelle::parcelle() : QWidget() {
     setAcceptDrops(true);
 }
 
+parcelle::parcelle(const parcelle & parc) {
+
+}
+
+parcelle & parcelle::operator= (const parcelle & parc) {
+
+}
+
+parcelle::~parcelle() {
+
+}
+
 parcelle::parcelle(int x, int y, int w, int h, Carrefour * caref) {
     positionX = x;
     positionY = y;

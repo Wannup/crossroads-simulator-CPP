@@ -5,21 +5,25 @@
 #include <QList>
 #include <QMouseEvent>
 
-class Panel : public QWidget
-{
+class Panel : public QWidget {
     Q_OBJECT
-public:
-    explicit Panel(QWidget *parent = 0);
-    void addWidget(QWidget * widget);
-    void removeAll();
-    void mousePressEvent(QMouseEvent *);
 
-private:
-    QList<QWidget *> list;
+    public:
+        Panel();
+        Panel(const Panel &);
+        Panel & operator=(const Panel &);
+        ~Panel();
+        explicit Panel(QWidget *parent = 0);
+        void addWidget(QWidget * widget);
+        void removeAll();
+        void mousePressEvent(QMouseEvent *);
 
-signals:
+    private:
+        QList<QWidget *> list;
 
-public slots:
+    signals:
+
+    public slots:
 
 };
 

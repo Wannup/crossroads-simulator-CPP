@@ -2,16 +2,23 @@
 #include <cstring>
 #include <string>
 
-Pieton::Pieton()
-{
+Pieton::Pieton() {
+
 }
 
-Pieton::Pieton(int v, int d, int x, int y)
-{
+Pieton::Pieton(const Pieton &p) {
+
+}
+
+Pieton::Pieton(int v, int d, int x, int y) {
     vitesse = v;
     degrePriseDeRisque = d;
     posx = x;
     posy = y;
+}
+
+Pieton & Pieton::operator=(const Pieton & p) {
+
 }
 
 void Pieton::avancer(std::string mouvement){
@@ -24,4 +31,8 @@ void Pieton::avancer(std::string mouvement){
     } else if (strcmp(mouvement.c_str(), "right") == 0) {
         posx++;
     }
+}
+
+Pieton::~Pieton() {
+
 }

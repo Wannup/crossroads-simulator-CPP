@@ -7,6 +7,9 @@ class ObjetRoute {
 
     public:
         ObjetRoute();
+        ObjetRoute(const ObjetRoute &);
+        ObjetRoute & operator=(const ObjetRoute &);
+        ~ObjetRoute();
         ObjetRoute(Configuration *);
         void play();
 

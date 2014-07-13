@@ -11,6 +11,9 @@ class parcelle : public QWidget {
 
     public:
         parcelle();
+        parcelle(const parcelle &);
+        parcelle & operator=(const parcelle &);
+        ~parcelle();
         parcelle(int, int, int, int, Carrefour *);
         void removeVoiture();
         void addVoiture();

@@ -16,6 +16,18 @@ fenetre::fenetre() : QWidget() {
     rightPanel->show();
 }
 
+fenetre::fenetre(const fenetre & fen) {
+
+}
+
+fenetre & fenetre::operator= (const fenetre & fen) {
+
+}
+
+fenetre::~fenetre() {
+
+}
+
  Panel * fenetre::getTopPanel() {
     return topPanel;
 }

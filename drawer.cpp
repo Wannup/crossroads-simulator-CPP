@@ -7,6 +7,18 @@ drawer::drawer() {
     rt = route_horizontal;
 }
 
+drawer::drawer(const drawer & draw) {
+
+}
+
+drawer & drawer::operator= (const drawer & draw) {
+
+}
+
+drawer::~drawer() {
+
+}
+
 drawer::drawer(routeType type) {
     rt = type;
 }

@@ -20,6 +20,9 @@ class drawer {
 
     public:
         drawer();
+        drawer(const drawer &);
+        drawer & operator=(const drawer &);
+        ~drawer();
         drawer(routeType type);
         drawer(std::string type);
         void drawInWidget(QWidget *widget);

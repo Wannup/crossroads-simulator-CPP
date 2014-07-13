@@ -4,6 +4,18 @@ Vehicule::Vehicule(){
 
 }
 
+Vehicule::Vehicule(const Vehicule & vehicule) {
+
+}
+
+Vehicule & Vehicule::operator= (const Vehicule & vehicule) {
+
+}
+
+Vehicule::~Vehicule() {
+
+}
+
 Vehicule::Vehicule(Position * pos) {
     position = pos;
 }

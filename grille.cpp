@@ -6,6 +6,14 @@ grille::grille() {
     widgets = new tableauDeuxDimension<QWidget *>(5, 5);
 }
 
+grille::grille(const grille & g) {
+
+}
+
+grille & grille::operator= (const grille & g) {
+
+}
+
 grille::grille(QWidget *parent) {
     gridLayout = new QGridLayout(parent);
     widgets = new tableauDeuxDimension<QWidget *>(5, 5);
@@ -41,6 +49,14 @@ std::vector<QWidget *> grille::getAdjacentWidget(int i, int j) {
         }
     }
     return vec;
+}
+
+int grille::getWidth() {
+    return this->widgets->getWidth();
+}
+
+int grille::getHeight() {
+    return this->widgets->getHeight();
 }
 
 grille::~grille() {
