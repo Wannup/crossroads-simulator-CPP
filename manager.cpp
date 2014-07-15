@@ -237,30 +237,21 @@ void manager::saveToXml() {
     projet = dom_doc.createElement("projet");
     dom_doc.appendChild(projet);
 
-    QString stringWidth = widthText->toPlainText();
-    int width = stringWidth.toInt();
-
-    QString stringHeight = heightText->toPlainText();
-    int height = stringHeight.toInt();
-
     if (fichier.open(QIODevice::ReadWrite)){
         out.setDevice(&fichier);
-        QDomElement grille = dom_doc.createElement("grille");
-        projet.appendChild(grille);
-        for (int i = 0 ; i < height ; i++) {
-            for (int j = 0; j < width ; j++) {
-                QDomElement cases = dom_doc.createElement("case");
-                grille.appendChild(cases);
-                cases.setAttribute("type",1); // Type de case
+        QDomElement g = dom_doc.createElement("grille");
+        projet.appendChild(g);
+        g.setAttribute("width",carefour->getGrille()->getWidth());
+        g.setAttribute("height",carefour->getGrille()->getHeight());
+        grille * gr = carefour->getGrille();
 
-                QDomElement x = dom_doc.createElement("Coord_X");
-                cases.appendChild(x);
-                QDomText x1 = dom_doc.createTextNode("X"); // Valeur X
-                x.appendChild(x1);
-                QDomElement y = dom_doc.createElement("Coord_Y");
-                cases.appendChild(y);
-                QDomText y1 = dom_doc.createTextNode("Y"); // Valeur Y
-                y.appendChild(y1);
+        for (int i = 0 ; i < gr->getHeight() ; i++) {
+            for (int j = 0; j < gr->getWidth() ; j++) {
+                QDomElement cases = dom_doc.createElement("case");
+                g.appendChild(cases);
+                cases.setAttribute("type",1); // Type de case
+                cases.setAttribute("x",i);
+                cases.setAttribute("y",j);
             }
         }
 
@@ -276,7 +267,7 @@ void manager::saveToXml() {
 
 void manager::loadFromXml() {
     QString files = QFileDialog::getOpenFileName(f, tr("Ouvrir un projet"),"",tr("(*.xml)"));
-
+    QDomDocument doc("file");
     if(files.isEmpty()) {
         cout << "Erreur à l'ouverture du document XML, Le document XML n'a pas pu être ouvert. Vérifiez que le nom est le bon et que le document est bien placé"<< endl;
         return;
@@ -295,8 +286,25 @@ void manager::loadFromXml() {
 
 
     // Génération de la grille
-    //
-    // TO DO
+    QDomElement docElem = doc.documentElement();
+    QDomNodeList nodeList = docElem.elementsByTagName("projet").at(0).toElement().elementsByTagName("grille").at(0).toElement().elementsByTagName("case");
+    QDomNodeList g = docElem.elementsByTagName("projet").at(0).toElement().elementsByTagName("grille");
+    int type;
+    int x;
+    int y;
 
+    if (nodeList.count() > 0){
+       for(int i=0; i<nodeList.count(); i++){
+             bool bOk = false;
+             type = nodeList.at(i).attributes().namedItem("type").nodeValue().toInt(&bOk,10); // Type de case
+             x = nodeList.at(i).attributes().namedItem("x").nodeValue().toInt(&bOk,10);
+             y = nodeList.at(i).attributes().namedItem("y").nodeValue().toInt(&bOk,10);
+
+             carefour->getGrille()->addWidget(new parcelle(x, y, 800/g.at(0).attributes().namedItem("width").nodeValue().toInt(&bOk,10), 400/g.at(0).attributes().namedItem("height").nodeValue().toInt(&bOk,10), this->carefour), x, y);
+        }
+    }
+
+    f->getCenterPanel()->removeAll();
+    f->getCenterPanel()->setLayout(this->carefour->getGrille()->getGridLayout());
 
 }
