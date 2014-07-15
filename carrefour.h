@@ -16,11 +16,12 @@ class Carrefour : public QObject {
     public:
         Carrefour();
         Carrefour(const Carrefour &);
-        Carrefour(std::list<Route> r);
+        Carrefour(std::list<Route *> r);
         Carrefour & operator=(const Carrefour &);
         Route findRouteByPosition(Position p);
         std::list<Vehicule> findVehiculeByPosition(Position *);
         grille * getGrille();
+        void addRoute (Route *);
         void addObjetRoute (Vehicule *);
         void getConfiguration (Position *);
         void play();
@@ -31,8 +32,8 @@ class Carrefour : public QObject {
         void annuleConfig();
 
     private:
-        std::list<Route> routes;
-        std::list<Vehicule> objetRoutes;
+        std::list<Route *> routes;
+        std::list<Vehicule *> objetRoutes;
         grille * g;
         Configuration * config;
 

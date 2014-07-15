@@ -4,6 +4,10 @@ Route::Route() {
 
 }
 
+Route::Route(Position * position) {
+    this->pos = position;
+}
+
 Route::Route(const Route & route) {
 
 }

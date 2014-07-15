@@ -1,4 +1,4 @@
-#include "Position.h"
+#include "position.h"
 
 Position::Position() {
     this->x = 0;
@@ -8,6 +8,12 @@ Position::Position() {
 Position::Position(int i, int j) {
     this->x = i;
     this->y = j;
+}
+
+Position::Position(int i, int j, orientation ori) {
+    this->x = i;
+    this->y = j;
+    this->orienta = ori;
 }
 
 Position::Position(const Position & position) {
@@ -55,4 +61,8 @@ int Position::getPositionX() {
 
 int Position::getPositionY() {
     return this->y;
+}
+
+orientation Position::getOrientation() {
+    return this->orienta;
 }

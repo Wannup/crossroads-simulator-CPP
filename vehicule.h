@@ -16,12 +16,14 @@ class Vehicule : public ObjetRoute {
         ~Vehicule();
         Vehicule(Position *);
         Position * getPosition();
+        Position * getPositionArrivee();
         void setPositionArrivee(Position *);
         virtual std::string getType();
         void avancer();
         void reculer();
         void tournerGauche();
         void tournerDroite();
+        bool estArrivee();
 
     private:
         Position * position;

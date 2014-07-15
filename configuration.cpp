@@ -16,12 +16,12 @@ Configuration::~Configuration() {
 
 }
 
-Vehicule * Configuration::getVehicule() {
-    return this->vehicule;
-}
-
 void Configuration::setVehicule(Vehicule * vehicule) {
     this->vehicule = vehicule;
+}
+
+Vehicule * Configuration::getVehicule() {
+    return this->vehicule;
 }
 
 void Configuration::setRoute(Route * route) {

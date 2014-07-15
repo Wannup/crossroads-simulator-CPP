@@ -6,11 +6,13 @@ Vehicule::Vehicule() : ObjetRoute::ObjetRoute() {
 
 Vehicule::Vehicule(const Vehicule & vehicule) : ObjetRoute::ObjetRoute(vehicule) {
     this->position = vehicule.position;
+    this->positionArrivee = vehicule.positionArrivee;
 }
 
 Vehicule & Vehicule::operator= (const Vehicule & vehicule) {
     ObjetRoute::operator =(vehicule);
     this->position = vehicule.position;
+    this->positionArrivee = vehicule.positionArrivee;
     return *this;
 }
 
@@ -26,8 +28,11 @@ Position * Vehicule::getPosition() {
     return this->position;
 }
 
+Position * Vehicule::getPositionArrivee() {
+    return this->positionArrivee;
+}
+
 void Vehicule::setPositionArrivee(Position * pos) {
-    delete this->positionArrivee;
     this->positionArrivee = pos;
 }
 
@@ -50,3 +55,8 @@ void Vehicule::tournerGauche(){
 void Vehicule::tournerDroite(){
     this->position->droite();
 }
+
+bool Vehicule::estArrivee()  {
+    return *(this->position) == *(this->positionArrivee);
+}
+

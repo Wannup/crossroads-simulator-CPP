@@ -4,7 +4,7 @@
 #include <Qt>
 
 drawer::drawer() {
-    rt = route_horizontal;
+    //rt = route_horizontal;
 }
 
 drawer::drawer(const drawer & draw) {

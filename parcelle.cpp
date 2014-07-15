@@ -76,24 +76,13 @@ void parcelle::dropEvent(QDropEvent * event) {
         this->drawableWidgetVoiture->setDrawer(new drawer(qs.toStdString()));
         this->drawableWidgetVoiture->repaint();
         this->carefour->addObjetRoute(new Voiture(new Position(this->positionX, this->positionY)));
+    } else if (qs.toStdString() == "route_horizontal") {
+        this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
+        this->drawableWidgetRoute->repaint();
+        this->carefour->addRoute(new Route(new Position(this->positionX, this->positionY, horizontal)));
     } else {
-        bool dropAuthorized = true;
-        /*vector<QWidget *> vec = this->g->getAdjacentWidget(this->positionX, this->positionY);
-        vector<QWidget *>::iterateur it ;
-        for (it = vec.begin() ; it != vec.end() ; it++) {
-            if (*it != NULL) {
-                parcelle * parc = (parcelle) *it;
-                if (parc) {
-                    cout << "authorized to put route";
-                } else {
-                    cout << "not authorized to put route";
-                }
-            }
-        }*/
-        if (dropAuthorized) {
-            this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
-            this->drawableWidgetRoute->repaint();
-        }
+        this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
+        this->drawableWidgetRoute->repaint();
     }
     this->repaint();
 }

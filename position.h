@@ -24,18 +24,21 @@ class Position {
         bool operator==(const Position &);
         ~Position();
         Position(int, int);
+        Position(int, int, orientation);
         void avancer();
         void reculer();
         void droite();
         void gauche();
         int getPositionX();
         int getPositionY();
+        orientation getOrientation();
 
     private:
         int x;
         int y;
         bool isFree;
         std::list<Position> positionsConnexes;
+        orientation orienta;
         //std::list<Contrainte> contraintes;
 };
 

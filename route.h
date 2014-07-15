@@ -2,12 +2,13 @@
 #define ROUTE_H
 
 #include <list>
-#include <Position.h>
+#include "position.h"
 
 class Route {
 
     public:
         Route();
+        Route(Position *);
         Route(const Route &);
         Route & operator=(const Route &);
         ~Route();
