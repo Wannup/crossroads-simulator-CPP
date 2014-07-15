@@ -5,6 +5,7 @@
 #include "position.h"
 
 #include <list>
+#include <string>
 
 class Vehicule : public ObjetRoute {
 
@@ -15,6 +16,8 @@ class Vehicule : public ObjetRoute {
         ~Vehicule();
         Vehicule(Position *);
         Position * getPosition();
+        void setPositionArrivee(Position *);
+        virtual std::string getType();
         void avancer();
         void reculer();
         void tournerGauche();
@@ -22,6 +25,7 @@ class Vehicule : public ObjetRoute {
 
     private:
         Position * position;
+        Position * positionArrivee;
         bool canMove;
         std::list<Position> PositionsPrevisionnelles;
 };

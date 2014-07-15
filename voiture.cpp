@@ -20,3 +20,7 @@ Voiture & Voiture::operator= (const Voiture & voiture) {
 Voiture::~Voiture() {
 
 }
+
+std::string Voiture::getType() {
+    return "voiture";
+}

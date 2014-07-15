@@ -26,6 +26,15 @@ Position * Vehicule::getPosition() {
     return this->position;
 }
 
+void Vehicule::setPositionArrivee(Position * pos) {
+    delete this->positionArrivee;
+    this->positionArrivee = pos;
+}
+
+std::string Vehicule::getType() {
+    return "vehicule";
+}
+
 void Vehicule::avancer(){
     this->position->avancer();
 }

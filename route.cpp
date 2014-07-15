@@ -15,3 +15,7 @@ Route & Route::operator= (const Route & route) {
 Route::~Route() {
 
 }
+
+Position * Route::getPosition() {
+    return this->pos;
+}

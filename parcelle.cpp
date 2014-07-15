@@ -3,13 +3,16 @@
 
 #include <QtGui>
 #include <QApplication>
+#include <QMenu>
 #include <vector>
 
 parcelle::parcelle() : QWidget() {
     this->drawableWidgetRoute = new DrawableWidget();
     this->drawableWidgetRoute->setParent(this);
+    this->drawableWidgetRoute->setEnabled(false);
     this->drawableWidgetVoiture = new DrawableWidget();
     this->drawableWidgetVoiture->setParent(this);
+    this->drawableWidgetVoiture->setEnabled(false);
     this->positionX = 0;
     this->positionY = 0;
     setAcceptDrops(true);
@@ -39,9 +42,11 @@ parcelle::parcelle(int x, int y, int w, int h, Carrefour * caref) {
     this->drawableWidgetRoute = new DrawableWidget();
     this->drawableWidgetRoute->setFixedSize(width, height);
     this->drawableWidgetRoute->setParent(this);
+    this->drawableWidgetRoute->setEnabled(false);
     this->drawableWidgetVoiture = new DrawableWidget();
     this->drawableWidgetVoiture->setFixedSize(width, height);
     this->drawableWidgetVoiture->setParent(this);
+    this->drawableWidgetVoiture->setEnabled(false);
     this->drawableWidgetVoiture->setWindowOpacity(0.1);
     QPalette palette(parcelle::palette());
     palette.setColor(QPalette::Background, Qt::darkGray);
@@ -59,7 +64,6 @@ void parcelle::addVoiture() {
     this->drawableWidgetVoiture->setDrawer(new drawer("voiture"));
     this->drawableWidgetVoiture->repaint();
 }
-
 
 void parcelle::dragEnterEvent(QDragEnterEvent *event) {
     event->acceptProposedAction();
@@ -92,6 +96,24 @@ void parcelle::dropEvent(QDropEvent * event) {
         }
     }
     this->repaint();
+}
+
+void parcelle::mousePressEvent(QMouseEvent * event) {
+    if(event->button() == Qt::RightButton) {
+        QPoint globalPos = this->mapToGlobal(event->pos());
+
+        QMenu * myMenu = new QMenu(this);
+        myMenu->addAction("Configurer");
+        myMenu->addAction("Supprimer");
+        QAction* selectedItem = myMenu->exec(globalPos);
+        if (selectedItem) {
+            if (selectedItem->text() == "Configurer") {
+                this->carefour->getConfiguration(new Position(this->positionX, this->positionY));
+            } else if (selectedItem->text() == "Supprimer") {
+
+            }
+        }
+    }
 }
 
 void parcelle::play() {

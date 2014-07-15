@@ -25,6 +25,10 @@ Position & Position::operator= (const Position & position) {
     return *this;
 }
 
+bool Position::operator==(const Position & position) {
+    return this->x == position.x && this->y == position.y;
+}
+
 Position::~Position() {
 
 }

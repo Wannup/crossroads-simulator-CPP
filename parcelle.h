@@ -22,6 +22,7 @@ class parcelle : public QWidget {
     protected:
         void dragEnterEvent(QDragEnterEvent *);
         void dropEvent(QDropEvent *);
+        void mousePressEvent(QMouseEvent *);
 
     private :
         int positionX;

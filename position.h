@@ -21,6 +21,7 @@ class Position {
         Position();
         Position(const Position &);
         Position & operator=(const Position &);
+        bool operator==(const Position &);
         ~Position();
         Position(int, int);
         void avancer();

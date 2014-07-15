@@ -13,6 +13,7 @@ class Voiture : public Vehicule {
         ~Voiture();
         Voiture(const Voiture &);
         Voiture & operator=(const Voiture &);
+        std::string getType();
 
 };
 
