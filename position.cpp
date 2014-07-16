@@ -19,6 +19,7 @@ Position::Position(int i, int j, orientation ori) {
 Position::Position(const Position & position) {
     this->x = position.x;
     this->y = position.y;
+    this->orienta = position.orienta;
 
 }
 
@@ -28,6 +29,7 @@ Position & Position::operator= (const Position & position) {
     }
     this->x = position.x;
     this->y = position.y;
+    this->orienta = position.orienta;
     return *this;
 }
 

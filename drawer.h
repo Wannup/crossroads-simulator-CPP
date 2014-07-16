@@ -13,7 +13,8 @@ enum routeType {
     voiture,
     moto,
     camion,
-    pieton
+    pieton,
+    autre
 };
 
 class drawer {

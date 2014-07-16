@@ -32,6 +32,18 @@ Carrefour & Carrefour::operator=(const Carrefour & carf) {
     return *this;
 }
 
+bool Carrefour::hasRoute(Position * p) {
+    std::list<Route *>::iterator it;
+    for (it = this->routes.begin() ; it != this->routes.end() ; it++) {
+        Route * route = (Route *) *it;
+        if (*(route->getPosition()) == *p) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 Route Carrefour::findRouteByPosition(Position p) {
     std::list<Route *>::iterator it;
     for (it = this->routes.begin() ; it != this->routes.end() ; it++) {
@@ -124,7 +136,7 @@ void Carrefour::play() {
     std::list<Vehicule *>::iterator it;
     for (it = this->objetRoutes.begin() ; it != this->objetRoutes.end() ; it++) {
         Vehicule * objr = (Vehicule *) *it;
-        Voiture * v = (Voiture *) objr;
+        /*Voiture * v = (Voiture *) objr;
         Position * p = v->getPosition();
         Position * pArrivee = v->getPositionArrivee();
         while (!v->estArrivee()) {
@@ -141,7 +153,10 @@ void Carrefour::play() {
             }
             parcelle * parc2 = (parcelle *) this->g->getWidget(p->getPositionX(), p->getPositionY());
             parc2->addVoiture();
-        }
+        }*/
+        CarrefourThread * thread = new CarrefourThread(this,objr);
+        QObject::connect(thread, &CarrefourThread::positionChanged, this, &Carrefour::handlePositionChanged);
+        thread->start();
     }
 }
 
@@ -156,7 +171,73 @@ void Carrefour::annuleConfig() {
     this->config->getQWidget()->close();
 }
 
+void Carrefour::handlePositionChanged(Position *oldPos, Position *newPos) {
+    parcelle * parc = (parcelle *) this->g->getWidget(oldPos->getPositionX(), oldPos->getPositionY());
+    parc->removeVoiture();
+    parcelle * parc2 = (parcelle *) this->g->getWidget(newPos->getPositionX(), newPos->getPositionY());
+    parc2->addVoiture();
+}
+
 Carrefour::~Carrefour() {
     delete this->g;
+}
+
+CarrefourThread::CarrefourThread(Carrefour * carefour, Vehicule * vehicule) {
+    this->c = carefour;
+    this->v = vehicule;
+}
+
+void CarrefourThread::run() {
+    Position * p = this->v->getPosition();
+    Position * pArrivee = this->v->getPositionArrivee();
+    while (!this->v->estArrivee()) {
+        Position * oldPos = new Position(*p);
+        bool positionHasChanged = false;
+         if (p->getPositionY() < pArrivee->getPositionY()) {
+             Position * pos = new Position(p->getPositionX(), p->getPositionY());
+             pos->avancer();
+             if (this->c->hasRoute(pos)) {
+                 Route route = this->c->findRouteByPosition(*pos);
+                 if (route.getPosition()->getOrientation() == horizontal || route.getPosition()->getOrientation() == all) {
+                     v->avancer();
+                     positionHasChanged = true;
+                 }
+             }
+        }
+        if (p->getPositionY() > pArrivee->getPositionY() && !positionHasChanged) {
+            Position * pos = new Position(p->getPositionX(), p->getPositionY());
+            pos->reculer();
+            if (this->c->hasRoute(pos)) {
+                Route route = this->c->findRouteByPosition(*pos);
+                if (route.getPosition()->getOrientation() == horizontal || route.getPosition()->getOrientation() == all) {
+                    v->reculer();
+                    positionHasChanged = true;
+                }
+            }
+        } else if (p->getPositionX() > pArrivee->getPositionX() && !positionHasChanged) {
+            Position * pos = new Position(p->getPositionX(), p->getPositionY());
+            pos->gauche();
+            if (this->c->hasRoute(pos)) {
+                Route route = this->c->findRouteByPosition(*pos);
+                if (route.getPosition()->getOrientation() == vertical || route.getPosition()->getOrientation() == all) {
+                    v->tournerGauche();
+                    positionHasChanged = true;
+                }
+            }
+        } else if (p->getPositionX() < pArrivee->getPositionX() && !positionHasChanged) {
+            Position * pos = new Position(p->getPositionX(), p->getPositionY());
+            pos->droite();
+            if (this->c->hasRoute(pos)) {
+                Route route = this->c->findRouteByPosition(*pos);
+                if (route.getPosition()->getOrientation() == vertical || route.getPosition()->getOrientation() == all) {
+                    v->tournerDroite();
+                    positionHasChanged = true;
+                }
+            }
+        }
+        if (positionHasChanged) {
+            emit positionChanged(oldPos, p);
+        }
+    }
 }
 

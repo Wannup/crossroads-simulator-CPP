@@ -4,7 +4,7 @@
 #include <Qt>
 
 drawer::drawer() {
-    //rt = route_horizontal;
+    rt = autre;
 }
 
 drawer::drawer(const drawer & draw) {
@@ -43,7 +43,7 @@ drawer::drawer(std::string name) {
     } else if (name == "pieton") {
         rt = pieton;
     } else {
-        rt = route_horizontal;
+        rt = autre;
     }
 }
 

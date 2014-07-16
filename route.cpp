@@ -9,11 +9,11 @@ Route::Route(Position * position) {
 }
 
 Route::Route(const Route & route) {
-
+    this->pos = route.pos;
 }
 
 Route & Route::operator= (const Route & route) {
-
+    this->pos = route.pos;
 }
 
 Route::~Route() {

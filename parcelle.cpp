@@ -80,6 +80,14 @@ void parcelle::dropEvent(QDropEvent * event) {
         this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
         this->drawableWidgetRoute->repaint();
         this->carefour->addRoute(new Route(new Position(this->positionX, this->positionY, horizontal)));
+    } else if (qs.toStdString() == "route_vertical") {
+        this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
+        this->drawableWidgetRoute->repaint();
+        this->carefour->addRoute(new Route(new Position(this->positionX, this->positionY, vertical)));
+    } else if (qs.toStdString() == "croisement") {
+        this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
+        this->drawableWidgetRoute->repaint();
+        this->carefour->addRoute(new Route(new Position(this->positionX, this->positionY, all)));
     } else {
         this->drawableWidgetRoute->setDrawer(new drawer(qs.toStdString()));
         this->drawableWidgetRoute->repaint();
