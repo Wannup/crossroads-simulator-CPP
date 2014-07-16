@@ -174,9 +174,11 @@ void manager::newProjet() {
 }
 
 void manager::createGrille() {
-    /*delete this->carefour->getGrille();
+    delete this->carefour->getGrille();
 
-    this->carefour->getGrille() = new grille();*/
+    /*this->carefour->getGrille() = new grille();*/
+
+    this->carefour->setGrille(new grille());
 
     QString stringWidth = widthText->toPlainText();
     int width = stringWidth.toInt();

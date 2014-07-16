@@ -6,6 +6,7 @@
 #include <QTextEdit>
 #include <QPushButton>
 #include <iostream>
+#include <windows.h>
 
 Carrefour::Carrefour() {
     g = new grille();
@@ -64,6 +65,10 @@ std::list<Vehicule> Carrefour::findVehiculeByPosition(Position * p) {
         }
     }
     return vehicules;
+}
+
+void Carrefour::setGrille(grille * gril) {
+    this->g = gril;
 }
 
 grille * Carrefour::getGrille () {
@@ -238,6 +243,7 @@ void CarrefourThread::run() {
         if (positionHasChanged) {
             emit positionChanged(oldPos, p);
         }
+        Sleep(uint(200));
     }
 }
 

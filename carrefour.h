@@ -23,6 +23,7 @@ class Carrefour : public QObject {
         Route findRouteByPosition(Position p);
         std::list<Vehicule> findVehiculeByPosition(Position *);
         grille * getGrille();
+        void setGrille(grille *);
         void addRoute (Route *);
         void addObjetRoute (Vehicule *);
         void getConfiguration (Position *);
